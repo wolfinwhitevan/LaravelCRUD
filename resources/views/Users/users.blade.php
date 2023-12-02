@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laravel CRUD</title>
 </head>
+
 <style>
     body {
         font-family: 'HelveticaNeue', sans-serif;
