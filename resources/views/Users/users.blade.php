@@ -61,16 +61,17 @@
         color: #e0e0e0;
     }
 
-    .delete-btn {
+    .btn-danger {
         background-color: #e74c3c;
         color: #fff;
         border: none;
         padding: 8px 16px;
         cursor: pointer;
         transition: background-color 0.3s ease;
+        margin-top: 5px;
     }
 
-    .delete-btn:hover {
+    .btn.danger:hover {
         background-color: #c0392b;
     }
 </style>
