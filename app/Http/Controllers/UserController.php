@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Displays a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -23,7 +23,7 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Shows the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -58,7 +58,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Displays the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -69,7 +69,7 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Shows the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -82,7 +82,7 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Updates the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -104,7 +104,7 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Removes the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -128,17 +128,21 @@ class UserController extends Controller
         return view('Users.user_subjects_add')->with(compact('subjects', 'user'));
     }
 
+
+    // This method is responsible for handling the addition of subjects to a user
     public function post_user_subjects(Request $request) {
-        $subjects = array_keys($request->all());
-        $add_subjects = array();
+        $subjects = array_keys($request->all()); // retrieves all the keys from the request
+        $add_subjects = array(); // empty array to initialize to store subjects that need to be added
         //$user_id = $request->id;
 
-        $existing = User_Subjects::where('user_id', $request->id)->pluck('subject_id')->toArray();
+        $existing = User_Subjects::where('user_id', $request->id)->pluck('subject_id')->toArray(); // queries the db to get existing subject ids associated with the user
 
+        // checks if there are more than 2 subjects in the requests
         if(count($subjects) > 2) {
             for($x = 2; $x < count($subjects); $x++) {
                 //$subject_id = $subjects[$x];
 
+        // check and add subjects
                 if(!in_array($subjects[$x], $existing)) {
                     array_push($add_subjects, ['user_id' => $request->id, 'subject_id' => $subjects[$x]]);
                 }
